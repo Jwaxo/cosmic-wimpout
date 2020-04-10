@@ -1,0 +1,22 @@
+{
+  "server": {
+    "port" : 8080,
+    "console_colors": [
+      "red",
+      "green",
+      "yellow",
+      "blue",
+      "magenta",
+      "cyan",
+      "gray",
+      "bgRed",
+      "bgGreen",
+      "bgYellow",
+      "bgBlue",
+      "bgMagenta",
+      "bgCyan",
+      "bgWhite"
+    ],
+    "domain": "http://wimpout.jeffwax.com"
+  }
+}
