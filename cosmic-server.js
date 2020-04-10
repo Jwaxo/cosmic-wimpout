@@ -13,7 +13,7 @@ const request = require('request');
 const chalk = require('chalk');
 const stripAnsi = require('strip-ansi');
 
-const Board = require('./src/factories/cosmic-boardfactory');
+const Board = require('./src/factories/cosmic-boardFactory');
 
 const clients = [];
 const chatHistory = [];

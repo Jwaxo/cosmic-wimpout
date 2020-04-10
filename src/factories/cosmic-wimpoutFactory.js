@@ -8,7 +8,7 @@
  */
 
 const Twig = require('twig');
-const Board = require('./cosmic-boardfactory');
+const Board = require('./cosmic-boardFactory');
 
 class Wimpout {
 
@@ -27,6 +27,9 @@ class Wimpout {
     // Ensure that our first board has an id of 1. Ideally we would just say
     // this.addBoard(new Board(this));
     this.addBoard(new Board(this), 1);
+
+    // Add dice just to test.
+    this.boards[1].throwDice();
   }
 
   /**

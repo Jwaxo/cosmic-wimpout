@@ -9,7 +9,7 @@
 
 const config = require('config');
 
-const Wimpout = require('./src/factories/cosmic-wimpoutfactory');
+const Wimpout = require('./src/factories/cosmic-wimpoutFactory');
 
 const cosmic = new Wimpout(config);
 
