@@ -13,7 +13,7 @@ const request = require('request');
 const chalk = require('chalk');
 const stripAnsi = require('strip-ansi');
 
-const Board = require('./src/factories/cosmic-boardFactory');
+const Client = require('./src/factories/cosmic-clientFactory');
 
 const clients = [];
 const chatHistory = [];
@@ -72,6 +72,41 @@ module.exports = (cosmic, config) => {
       chatHistory,
     });
   });
+
+  /**
+   * Handling of individual sockets as they remain connected.
+   * Creates a Client to track the user at the socket, which is then used for all
+   * received commands.
+   */
+  io.on('connection', socket => {
+    serverLog(`New connection established with hash ${socket.id}`, true);
+
+    const randomColor = Math.floor(Math.random() * (console_colors.length));
+
+    const clientSession = socket.handshake.session;
+    const client = new Client(socket, Wimpout);
+    const clientId = clients.push(client);
+    client.setId(clientId);
+    client.setColor(chalk[console_colors[randomColor]]);
+
+    serverLog(`${client.getId()} assigned to socket ${socket.id}`, true);
+
+    // Generate everything that may change based off of an existing client connection
+    // or resumed session.
+    regenerateChatSingle(socket);
+
+    /**
+     * A client rolled the dice.
+     *
+     * @todo: only allow rolling on your turn.
+     */
+    socket.on('roll-dice', data => {
+      board.rollDice();
+
+      regenerateDice(board);
+
+    });
+  });
 };
 
 /**
@@ -93,6 +128,24 @@ function serverLog(message, serverOnly = false) {
   }
 
   console.log(log);
+}
+
+/**
+ * Renders the players and updates all clients with new player info.
+ */
+function regenerateChatSingle(socket) {
+  Twig.renderFile('./views/chat-container.twig', {chatHistory}, (error, html) => {
+    socket.emit('rebuild-chat', html);
+  });
+}
+
+/**
+ * Renders the dice cards with new info.
+ */
+function regenerateDice(board) {
+  Twig.renderFile('./views/dice-container.twig', {board}, (error, html) => {
+    io.sockets.emit('rebuild-dice', html);
+  });
 }
 
 /**

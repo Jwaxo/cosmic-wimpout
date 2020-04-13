@@ -6,26 +6,14 @@ $(function() {
 
   boardSetup(true);
 
-  /**
-   * We've been registered as a new connection, or are updating a current one.
-   */
-  socket.on('set-client', (newClient, isUpdate) => {
-    client = newClient;
-
-    if (!isUpdate) {
-      const playerId = localStorage.getItem(client.playerStorage);
-
-      // Check for a playerId cookie for this specific game board. Since cookies
-      // are strings, this will return TRUE even if '0'.
-      if (playerId !== null) {
-        socket.emit('pick-player', parseInt(playerId));
-      }
-    }
-  });
-
   socket.on('rebuild-chat', html => {
     const chatContainer = $('#chat_container');
     chatContainer.html(html);
+  });
+
+  socket.on('rebuild-dice', html => {
+    const diceContainer = $('#dice_container');
+    diceContainer.html(html);
   });
 
   /**
@@ -58,6 +46,14 @@ $(function() {
     if (!initial) {
       boardInfoContainer.foundation();
     }
+
+    $('#dice_roll').unbind('click').click(element => {
+      rollDice();
+    });
+  }
+
+  function rollDice() {
+    socket.emit('roll-dice');
   }
 
 });

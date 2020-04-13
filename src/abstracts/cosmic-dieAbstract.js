@@ -15,7 +15,7 @@ class DieAbstract {
     this.face_count = null;
     this.face_values = {};
     this.status = 0;
-    this.roll = null;
+    this.face = null;
 
     Wimpout = cosmic;
 
@@ -33,12 +33,13 @@ class DieAbstract {
   getStatus() {
     return this.status;
   }
-  setRoll(roll) {
-    this.roll = roll;
+  setFace(roll) {
+    this.face = roll;
   }
-  getRoll() {
-    return this.roll;
+  getFace() {
+    return this.face;
   }
+
   getFaceCount() {
     if (this.face_count === null) {
       throw new TypeError(this.constructor.name + " does not initialize face_count property.");
@@ -46,8 +47,9 @@ class DieAbstract {
 
     return this.face_count;
   }
+
   getFaceValue() {
-    const roll = this.getRoll();
+    const roll = this.getFace();
     if (!this.face_values.hasOwnProperty(roll)) {
       throw new TypeError(this.constructor.name + " does not define face_value property for roll of " + roll);
     }
@@ -55,10 +57,10 @@ class DieAbstract {
     return this.face_values[roll];
   }
 
-  throw() {
+  roll() {
     const face_count = this.getFaceCount();
     // Subtract 1 from the face count to index at 0.
-    this.setRoll(Math.floor(Math.random() * Math.floor(face_count - 1)));
+    this.setFace(Math.floor(Math.random() * Math.floor(face_count - 1)));
 
     return this.getFaceValue();
   }

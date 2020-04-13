@@ -1,0 +1,15 @@
+{% set dieClasses = [
+  'card',
+  'die',
+  'die--' ~ die.getType(),
+]|join(' ')|trim %}
+
+<div class="{{ dieClasses }}">
+  <div class="card-section">
+    {{ die.getType() }}
+
+    <h4>{{ die.getFaceValue().name }}</h4>
+
+  </div>
+
+</div>

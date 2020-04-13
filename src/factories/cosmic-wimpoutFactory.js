@@ -29,7 +29,7 @@ class Wimpout {
     this.addBoard(new Board(this), 1);
 
     // Add dice just to test.
-    this.boards[1].throwDice();
+    this.boards[1].rollDice();
   }
 
   /**

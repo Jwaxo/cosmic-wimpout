@@ -57,10 +57,10 @@ class Board {
     this.dice.push(new Die());
   }
 
-  throwDice() {
+  rollDice() {
     const dice = this.getDice();
     for (let die of dice) {
-      die.throw();
+      die.roll();
     }
   }
 }
