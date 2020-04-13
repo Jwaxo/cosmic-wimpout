@@ -1,0 +1,29 @@
+
+<div class="grid-x grid-margin-x">
+  <div class="cell medium-6 large-4">
+    <h1>Cosmic Wimpout</h1>
+    <p>Roll some dice.</p>
+  </div>
+
+  <div class="cell medium-6 large-4">
+    <em>Notice a bug or want to request a feature? Check our <a href="https://github.com/Jwaxo/cosmic-wimpout/issues" target="_blank">Issue Queue!</a></em>
+  </div>
+
+  <div class="cell medium-6 large-4">
+
+    <div id="board_info_container" class="board-info">
+      {% include "board-data.twig" %}
+    </div>
+  </div>
+</div>
+
+<div id="players">
+  {% include 'players-container.twig' %}
+</div>
+
+<div id="chat_container">
+  {% include 'chat-container.twig' %}
+</div>
+
+<div id="status_container" class="status-box">
+</div>

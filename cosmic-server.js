@@ -70,7 +70,6 @@ module.exports = (cosmic, config) => {
     res.render('index.twig', {
       board,
       chatHistory,
-      recaptcha_key: config.get('recaptcha.key'),
     });
   });
 };
