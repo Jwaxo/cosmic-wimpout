@@ -19,7 +19,7 @@ const clients = [];
 const chatHistory = [];
 const app = express();
 const server = http.Server(app);
-const uuid = require('uuid/v4');
+const { v4: uuid } = require('uuid');
 const io = socketio(server);
 
 let Wimpout;

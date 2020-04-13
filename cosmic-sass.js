@@ -34,7 +34,7 @@ module.exports = () => {
       })
         .on('error', $.sass.logError))
       .pipe($.postcss([
-        autoprefixer({ browsers: ['last 2 versions', 'ie >= 9'] })
+        autoprefixer({ overrideBrowserslist: ['last 2 versions', 'ie >= 9'] })
       ]))
       .pipe(gulp.dest('public/css'));
     console.log('Render complete!');
